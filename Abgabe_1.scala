@@ -38,11 +38,27 @@ object Abgabe1 {
       if (l == Nil) l
       else l.head :: l.head :: dupall(l.tail)
 
-    println("die Liste l, in der alle Elemente verdoppelt sind" + dupall(List(1, 2, 3, 4, 5, 6)))
+    println("die Liste l, in der alle Elemente verdoppelt sind: " + dupall(List(1, 2, 3, 4, 5, 6)))
 
-    //def insertAt (l: List[…], i: Int, x: …): List[…] und
-    //def removeAt (l: List[…], i: Int): List[…]
-    //Element an n-ter Stelle einfügen bzw. löschen
+    def dupall2(l: List[Integer]): List[Integer] =
+      if (l == Nil) l
+      else l.head * 2 :: dupall2(l.tail)
+
+    println("die Liste l, in der alle Elemente verdoppelt sind: " + dupall2(List(1, 2, 3, 4, 5, 6)))
+
+    def insertAt(l: List[Integer], i: Int, x: Integer): List[Integer] =
+      if (l == Nil) l
+      else if (i == 0) x :: l
+      else l.head :: insertAt(l.tail, i - 1, x)
+
+    println("Element an n-ter Stelle einfügen: " + insertAt(List(1, 2, 3, 4, 5, 6), 2, -1))
+
+    def removeAt(l: List[Integer], i: Int): List[Integer] =
+      if (l == Nil) l
+      else if (i == 0) l.tail
+      else l.head :: removeAt(l.tail, i - 1)
+
+    println("Element an n-ter Stelle löschen:  " + removeAt(List(1, 2, 3, 4, 5, 6), 3))
 
   }
 }
