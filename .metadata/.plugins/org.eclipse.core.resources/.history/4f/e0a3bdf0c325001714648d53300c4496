@@ -1,0 +1,14 @@
+
+
+object coins {
+  
+  def coins(args: Array[String]){
+    val coinDenominations = Set(1, 2, 5) 
+    coinOptions(coinDenominations, 0)
+  }
+  
+  def coinOptions(coinDenominations: Set[Int], counter: Int) : Int =
+    coinOptions(coinDenominations, counter)
+  
+}
+

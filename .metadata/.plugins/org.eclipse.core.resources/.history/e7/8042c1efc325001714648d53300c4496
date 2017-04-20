@@ -1,0 +1,19 @@
+
+
+object coins {
+  
+  def coins(args: Array[String]){
+    val coinDenominations = Set(1, 2, 5) 
+    coinOptions(coinDenominations, 0)
+  }
+  
+  def coinOptions(coinDenominations: Set[Int], counter: Int) : Int =
+    coinOptions(coinDenominations, counter)
+  
+}
+
+
+ def insertAt(l: List[Integer], i: Int, x: Integer): List[Integer] =
+      if (l == Nil) l
+      else if (i == 0) x :: l
+      else l.head :: insertAt(l.tail, i - 1, x)

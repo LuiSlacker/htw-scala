@@ -1,0 +1,46 @@
+
+
+object mainObj {
+  
+  def main(args: Array[String]) {
+    val nums: List[Int] = List(1, 2, 3, 4, 5, 6)
+    
+    println("List(1, 2, 3, 4, 5, 6)")
+    println("Length: " + length(nums))
+    println("Take first 2 Elements: " + take(nums, 2));
+    println("Drop first 2 Elements: " + drop(nums, 2))
+  }
+  
+  /**
+   * returns the length of a list
+   */
+  def length(l: List[Int]): Int =
+    if (l.isEmpty) 0
+    else length(l.tail) + 1
+    
+    
+  /**
+   * returns the first n elements from a list 
+   */
+  def take(l: List[Int], n: Int): List[Int] =
+    if (n == 0 || l.isEmpty) Nil
+    else l.head :: take(l.tail, n-1)
+    
+    
+  /**
+   * returns list without the first n elements
+   */
+  def drop(l: List[Int], n: Int): List[Int] =
+    if (n == 0 || l.isEmpty) l
+    else drop(l.tail, n-1)
+    
+    
+  //def uniq (l: List[Int]): List[Int] =
+  //def dupall (l: List[Int]): List[Int] =
+  def insertAt (l: List[Int], i: Int, x: Int): List[Int] =
+    if (i == 0) x :: l.tail
+    else t.head :: insertAt(l, i-1, x)
+    
+  //def removeAt (l: List[Int], i: Int): List[Int] =
+    
+}

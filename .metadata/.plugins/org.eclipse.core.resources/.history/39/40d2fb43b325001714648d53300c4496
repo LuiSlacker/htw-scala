@@ -1,0 +1,7 @@
+
+
+object test {
+  def test(args: Array[String]) {
+    println("hello scala");
+  }
+}
