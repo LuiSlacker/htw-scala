@@ -430,3 +430,9 @@ java.lang.NullPointerException
 2017-04-20 15:20:54,481  WARN [main] - ScalaProject - Project htw-scala runs on platform default installation.
 2017-04-20 15:20:54,664  WARN [Worker-133] - ScalaProject - Project htw-scala has platform default sourceLevel.
 2017-04-20 15:20:54,664  WARN [Worker-133] - ScalaProject - Project htw-scala runs on platform default installation.
+2017-04-21 15:35:34,516  WARN [main] - ScalaProject - Project htw-scala has platform default sourceLevel.
+2017-04-21 15:35:34,517  WARN [main] - ScalaProject - Project htw-scala runs on platform default installation.
+2017-04-21 15:35:34,520  WARN [main] - ScalaProject - Project htw-scala has platform default sourceLevel.
+2017-04-21 15:35:34,521  WARN [main] - ScalaProject - Project htw-scala runs on platform default installation.
+2017-04-21 15:35:40,503 ERROR [Worker-4] - System.err - log4j:WARN No appenders could be found for logger (org.eclipse.jgit.util.FS).
+2017-04-21 15:35:40,504 ERROR [Worker-4] - System.err - log4j:WARN Please initialize the log4j system properly.
