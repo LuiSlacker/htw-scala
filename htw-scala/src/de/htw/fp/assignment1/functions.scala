@@ -50,7 +50,7 @@ object functions {
    */
   def uniq(l: List[Int]): List[Int] =
     if (l.isEmpty) l
-    else if (uniq(l.tail).isEmpty || l.head != uniq(l.tail).head) l.head :: uniq(l.tail)
+    else if (l.tail.isEmpty || l.head != l.tail.head) l.head :: uniq(l.tail)
     else uniq(l.tail)
     
   /**
