@@ -19,10 +19,10 @@ object Abgabe1 {
 
     println("erste n Elemente der Liste: " + take(List(1, 2, 3, 4, 5), 2))
 
+
     def drop(l: List[Any], n: Int): List[Any] =
-      if (l == Nil) l
-      else if (length(l.tail) - n == 0) l.tail
-      else drop(l.tail, n)
+      if (l == Nil || n == 0) l
+      else drop(l.tail, n - 1)
 
     println("Liste ohne erste n Elemente: " + drop(List(1, 2, 3, 4, 5, 6, 7), 5))
 
