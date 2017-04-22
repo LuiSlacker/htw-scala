@@ -3,7 +3,7 @@ package de.htw.fp.assignment2
 object coins {
   def main(args: Array[String]) {
     val coinDenominations: List[Int] = List(1, 2, 5) 
-    println(coinOptions(800, coinDenominations))
+    println(coinOptions(3, coinDenominations))
   }
   
   /**
@@ -18,7 +18,7 @@ object coins {
       else count(price - coinDenominations.head, coinDenominations, counter) + count(price, coinDenominations.tail, counter)
     }
 
-    if (coinDenominations.isEmpty || price <= 0) 0
+    if (price <= 0) 0
     else count(price, coinDenominations, 0)
   }
 }
