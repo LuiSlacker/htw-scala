@@ -6,6 +6,11 @@ object coins {
     println(coinOptions(800, coinDenominations))
   }
   
+  /**
+   * returns number of possible denominations for a given price
+   * @param price the price to achieve
+   * @param coinDenominations the list of possible coins
+   */
   def coinOptions(price: Int, coinDenominations: List[Int]): Int = {
     def count(price: Int, coinDenominations: List[Int], counter: Int): Int = {
       if (price == 0) counter + 1
