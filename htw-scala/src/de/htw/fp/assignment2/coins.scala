@@ -20,7 +20,6 @@ object coins {
       else count(price - coinDenominations.head, coinDenominations, counter) + count(price, coinDenominations.tail, counter)
     }
 
-    if (price <= 0) 0
-    else count(price, coinDenominations, 0)
+    count(price, coinDenominations, 0)
   }
 }
