@@ -2,8 +2,10 @@ package de.htw.fp.assignment2
 
 object coins {
   def main(args: Array[String]) {
-    val coinDenominations: List[Int] = List(1, 2, 5)
-    println(coinOptions(3, coinDenominations))
+    // val coinDenominations: List[Int] = List(1, 2, 5)
+    // println(coinOptions(3, coinDenominations))
+
+    new assertions().runAssertionsCoins(coinOptions)
   }
 
   /**
