@@ -2,7 +2,7 @@ package de.htw.fp.assignment3
 
 object quickSort {
   def main(args: Array[String]) {
-    val l = List(1,3,7,5,2,6,4)
+    val l = List(5,3,7,5,2,6,4)
     println(quickSort(l))
   }
   
