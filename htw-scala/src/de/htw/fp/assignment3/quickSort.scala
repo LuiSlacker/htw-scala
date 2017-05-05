@@ -7,7 +7,7 @@ object quickSort {
   }
   
   def quickSort(l: List[Int]) : List[Int] =
-    if (l.length < 2) l
+    if (l.isEmpty) l
     else {
       val pivot: Int = l.head
       quickSort(l.filter(_ < pivot)) ::: l.filter(_ == pivot) ::: quickSort(l.filter(_ > pivot))
