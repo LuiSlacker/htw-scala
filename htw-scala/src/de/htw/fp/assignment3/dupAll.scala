@@ -29,17 +29,17 @@ object dupAll {
    */
   def dupAll2(l: List[Int]): List[Int] = {
     
-    def f1: ListEnhancer = (el: Int, list: List[Int]) => el :: list
-    def f2: ListEnhancer = (el: Int, list: List[Int]) => el :: el :: list
+    def prependEl: ListEnhancer = (el: Int, list: List[Int]) => el :: list
+    def prependElTwice: ListEnhancer = (el: Int, list: List[Int]) => el :: el :: list
     
     type ListEnhancer = (Int, List[Int]) => List[Int]
     
-    @tailrec def duplicate(all: List[Int], acc: List[Int], f: ListEnhancer): List[Int] = {
+    @tailrec def tailRecMap(all: List[Int], acc: List[Int], f: ListEnhancer): List[Int] = {
       if (all.isEmpty) acc
-      else duplicate(all.tail, f(all.head, acc), f)
+      else tailRecMap(all.tail, f(all.head, acc), f)
     }
     
-    duplicate(duplicate(l, List(), f2), List(), f1)
+    tailRecMap(tailRecMap(l, List(), prependElTwice), List(), prependEl)
   }
   
  }
