@@ -1,8 +1,6 @@
 package de.htw.fp.assignment4
 
-case class Cell(free: Boolean, start: Boolean) {
-  override def toString = free.toString()
-}
+case class Cell(free: Boolean, start: Boolean)
 
 case class Position(x: Int, y: Int) {
   def top = Position(x, y - 1)

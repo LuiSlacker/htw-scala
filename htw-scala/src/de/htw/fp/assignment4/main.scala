@@ -1,12 +1,12 @@
 package de.htw.fp.assignment4
 
 import scala.io.Source
+import scala.annotation.tailrec
 
 object main {
   def main(args: Array[String]) {
     val basePath = "src/de/htw/fp/assignment4/";
-    val labyrinth: Labyrinth = readLabyrinthFile(basePath + "labyrinth3.txt")
-    println(labyrinth)
+    val labyrinth: Labyrinth = readLabyrinthFile(basePath + "labyrinth1.txt")
     println(findPath(labyrinth))
   }
   
@@ -24,10 +24,17 @@ object main {
     }
   }
   
-  def findPath(labyrinth: Labyrinth): Position = {
+  def findPath(labyrinth: Labyrinth): Path = {
     
     def findStart(labyrinth: Labyrinth): Position = {
-      Position(1, 2)
+      for(y <- 0 until labyrinth.length) {
+        for (x <- 0 until labyrinth(y).length) {
+          if (labyrinth(y)(x).start) 
+            return Position(x, y)
+        }
+      }
+      
+      Position(-1, -1)
     }
     
     def isExit(p: Position, labyrinth: Labyrinth): Boolean =  {
@@ -43,22 +50,22 @@ object main {
       labyrinth(p.y)(p.x).free
     }
     
-    def nonVisitedNeighbours(labyrinth: Labyrinth, position: Position, visited: Path): List[Position] = {
-      println(position)
+    def notVisited(path: Path, position: Position): Boolean = {
+      !path.contains(position)
+    }
+    
+    def nonVisitedFreeNeighbours(labyrinth: Labyrinth, position: Position, path: Path): List[Position] = {
       List(position.right, position.bottom, position.left, position.top)
-        .filter (p => isValidPosition(labyrinth, p) && isFree(labyrinth, p) && !visited.contains(p))
+        .filter (p => isValidPosition(labyrinth, p) && isFree(labyrinth, p) && notVisited(path, p))
     }
     
-    def depthFirstSearch(labyrinth: Labyrinth, path: Path, stack: List[Position], visited: Path): Position = {
-      if (isExit(stack.head, labyrinth) || stack.isEmpty) stack.head
-      else {
-        val neighbours: List[Position] = nonVisitedNeighbours(labyrinth, stack.head, visited)
-        println(neighbours)
-        depthFirstSearch(labyrinth, path, neighbours ::: stack.tail, stack.head :: visited)
-      }
+    @tailrec
+    def depthFirstSearch(labyrinth: Labyrinth, path: Path, stack: List[Position]): Path = {
+      if (isExit(stack.head, labyrinth) || stack.isEmpty) path
+      else  depthFirstSearch(labyrinth, stack.head :: path, nonVisitedFreeNeighbours(labyrinth, stack.head, path) ::: stack.tail)
     }
     
-    depthFirstSearch(labyrinth, List(), List(Position(0, 1)), List())
+    depthFirstSearch(labyrinth, List(), List(findStart(labyrinth))) reverse
     
   }
   
