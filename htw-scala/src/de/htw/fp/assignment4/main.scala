@@ -6,7 +6,7 @@ import scala.annotation.tailrec
 object main {
   def main(args: Array[String]) {
     val basePath = "src/de/htw/fp/assignment4/";
-    val labyrinth: Labyrinth = readLabyrinthFile(basePath + "labyrinth3.txt")
+    val labyrinth: Labyrinth = readLabyrinthFile(basePath + "labyrinth1.txt")
     println(findPath(labyrinth))
   }
   
@@ -53,6 +53,22 @@ object main {
       !path.contains(position)
     }
     
+    def filterNeighbours(list: List[Position]): List[Position] = {
+      
+      def areNeighbours(a: Position, b: Position): Boolean = {
+        math.abs(a.x - b.x) <= 1 && math.abs(a.y - b.y) == 0 ||
+        math.abs(a.x - b.x) == 0 && math.abs(a.y - b.y) <= 1
+      }
+      
+      def filter(list: List[Position], ancestor: Position = Position(-3, -3), filteredList: List[Position]): List[Position] = {
+        if (list.isEmpty) filteredList
+        else if(areNeighbours(list.head, ancestor)) filter(list.tail, list.head, list.head :: filteredList)
+        else filter(list.tail, filteredList.head, filteredList)
+      }
+      
+      filter(list, list.head, List())
+    }
+    
     def nonVisitedFreeNeighbours(labyrinth: Labyrinth, position: Position, path: Path): List[Position] = {
       List(position.right, position.bottom, position.left, position.top)
         .filter (p => isValidPosition(labyrinth, p) && isFree(labyrinth, p) && notVisited(path, p))
@@ -60,12 +76,14 @@ object main {
     
     @tailrec
     def depthFirstSearch(labyrinth: Labyrinth, path: Path, stack: List[Position]): Path = {
-      if (isExit(stack.head, labyrinth)) path
+      if (isExit(stack.head, labyrinth)) stack.head :: path
       else
         depthFirstSearch(labyrinth, stack.head :: path, nonVisitedFreeNeighbours(labyrinth, stack.head, path) ::: stack.tail)
     }
-    
-    depthFirstSearch(labyrinth, List(), List(findStart(labyrinth))) reverse
+   
+    filterNeighbours(
+        depthFirstSearch(labyrinth, List(), List(findStart(labyrinth)))
+    )
   }
   
 }
