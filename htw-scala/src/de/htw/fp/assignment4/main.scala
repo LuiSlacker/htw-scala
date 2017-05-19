@@ -6,7 +6,7 @@ import scala.annotation.tailrec
 object main {
   def main(args: Array[String]) {
     val basePath = "src/de/htw/fp/assignment4/";
-    val labyrinth: Labyrinth = readLabyrinthFile(basePath + "labyrinth1.txt")
+    val labyrinth: Labyrinth = readLabyrinthFile(basePath + "labyrinth3.txt")
     println(findPath(labyrinth))
   }
   
@@ -33,7 +33,6 @@ object main {
             return Position(x, y)
         }
       }
-      
       Position(-1, -1)
     }
     
@@ -61,12 +60,12 @@ object main {
     
     @tailrec
     def depthFirstSearch(labyrinth: Labyrinth, path: Path, stack: List[Position]): Path = {
-      if (isExit(stack.head, labyrinth) || stack.isEmpty) path
-      else  depthFirstSearch(labyrinth, stack.head :: path, nonVisitedFreeNeighbours(labyrinth, stack.head, path) ::: stack.tail)
+      if (isExit(stack.head, labyrinth)) path
+      else
+        depthFirstSearch(labyrinth, stack.head :: path, nonVisitedFreeNeighbours(labyrinth, stack.head, path) ::: stack.tail)
     }
     
     depthFirstSearch(labyrinth, List(), List(findStart(labyrinth))) reverse
-    
   }
   
 }
