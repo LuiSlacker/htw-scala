@@ -1,9 +1,9 @@
 package de.htw.fp.assignment4
 
-import scala.io.Source
 import scala.annotation.tailrec
+import scala.io.Source
 
-object main {
+object main_tailRecursive {
   def main(args: Array[String]) {
     val basePath = "src/de/htw/fp/assignment4/";
     val labyrinth: Labyrinth = readLabyrinthFile(basePath + "labyrinth1.txt")
@@ -53,6 +53,11 @@ object main {
       !path.contains(position)
     }
     
+    def nonVisitedFreeNeighbours(labyrinth: Labyrinth, position: Position, path: Path): List[Position] = {
+    		List(position.right, position.bottom, position.left, position.top)
+    		.filter (p => isValidPosition(labyrinth, p) && isFree(labyrinth, p) && notVisited(path, p))
+    }
+    
     def filterNeighbours(list: List[Position]): List[Position] = {
       
       def areNeighbours(a: Position, b: Position): Boolean = {
@@ -67,11 +72,6 @@ object main {
       }
       
       filter(list, list.head, List())
-    }
-    
-    def nonVisitedFreeNeighbours(labyrinth: Labyrinth, position: Position, path: Path): List[Position] = {
-      List(position.right, position.bottom, position.left, position.top)
-        .filter (p => isValidPosition(labyrinth, p) && isFree(labyrinth, p) && notVisited(path, p))
     }
     
     @tailrec
