@@ -32,12 +32,13 @@ case class Fraction(numerator: Int, denominator: Int) {
   
   /**
    * Checks whether two cancelled Fractions are the same
+   * TODO is it possible to use super equals method to structurally compare the Fractions?
    */
   override def equals(that: Any) = that match {
     case frac: Fraction => frac.cancel().numerator == cancel().numerator && frac.cancel().denominator == cancel().denominator 
     case _ => false
   }
   
-  override def toString() = numerator + " / " + denominator
+  override def toString() = "(" + numerator + " / " + denominator + ")"
   
 }
