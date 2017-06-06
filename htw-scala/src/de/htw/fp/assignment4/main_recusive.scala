@@ -61,12 +61,10 @@ object main_recusive {
       if (isExit(position, labyrinth)) position :: path
       else {
         val neighboursNotYetVisited = nonVisitedFreeNeighbours(labyrinth, position, visited)
-        neighboursNotYetVisited.foreach { n =>
-          val rec = depthFirstSearch(labyrinth, n, path, n :: visited)
-          if (!rec.isEmpty) return position :: rec
-        }
+        (neighboursNotYetVisited.map { n => depthFirstSearch(labyrinth, n, path, n :: visited)}
+                                filter (n => !n.isEmpty)
+                                map (n => position :: n)).head
         
-        Nil
       }
     }
     

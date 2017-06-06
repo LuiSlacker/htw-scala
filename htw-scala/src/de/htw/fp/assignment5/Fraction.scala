@@ -8,7 +8,8 @@ import scala.annotation.tailrec
 case class Fraction(numerator: Int, denominator: Int) {
   
   /** Calculates the greatest common divisor for a given Fraction */
-  def gcd(frac: Fraction): Int = {
+  @tailrec
+  final def gcd(frac: Fraction): Int = {
     if (frac.denominator == 0) frac.numerator.abs
     else gcd(Fraction(frac.denominator, frac.numerator % frac.denominator))
   }
