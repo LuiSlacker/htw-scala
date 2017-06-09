@@ -4,14 +4,14 @@ object coins_v2 extends App {
 
   def countPricePossibilities(goal: Int, l: List[Int]): Int = {
     def checkPrice(sum: Int, l: List[Int]): Int =
-      if (goal == 0) 1
-      else if (l.isEmpty) 0
+      if (l.isEmpty || sum > goal) 0
       else if (goal == sum) 1
-      else if (sum > goal) checkPrice(sum, l.tail)
-      else if (sum < goal) checkPrice(sum + l.head, l) + checkPrice(sum, l.tail)
-      else 0
+      else checkPrice(sum + l.head, l) + checkPrice(sum, l.tail)
 
-    checkPrice(0, l)
+    if (goal == 0)
+      1
+    else
+      checkPrice(0, l)
   }
 
   new assertions().runAssertionsCoins(countPricePossibilities)

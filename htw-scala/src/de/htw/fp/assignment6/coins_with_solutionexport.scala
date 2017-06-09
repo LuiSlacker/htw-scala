@@ -17,7 +17,6 @@ object coins_with_solutionexport extends App {
 
       if (l.isEmpty) solutions
       else if (goal == sum) sumList :: solutions
-      else if (sum > goal) checkPrice(sumList, l.tail, solutions)
       else if (sum < goal) checkPrice(l.head :: sumList, l, solutions) ::: checkPrice(sumList, l.tail, solutions)
       else Nil
 
