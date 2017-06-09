@@ -34,14 +34,7 @@ class assertions {
     assert(coinOptions(10, coinVersions), 4)
     assert(coinOptions(11, coinVersions), 4)
     assert(coinOptions(12, coinVersions), 5)
-    /*
-  println("")
-  println("addUpCoins:")
-  assert(addUpCoins(List()), 0)
-  assert(addUpCoins(List(23)), 23)
-  assert(addUpCoins(List(2, 5, -10, 30)), 27)
-  assert(addUpCoins(List(2, 5, 10, 30)), 47)
-*/
+
   }
   def assert(a: Any, b: Any) =
     if (a == b) println("Jupp " + a + " == " + b)
