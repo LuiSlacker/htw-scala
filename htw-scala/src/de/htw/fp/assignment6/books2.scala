@@ -11,8 +11,8 @@ object books2 {
       new Book("And The Cow Makes Moo", List("J. K. Rolling", "Andy Weir")),
       new Book("The Lake", List("Peter Gross")))
 
-    var found = findAuthorsWithMultipleTitles(books)
-    var expected = List("J. K. Rolling", "Andy Weir")
+    val found = findAuthorsWithMultipleTitles(books)
+    val expected = List("J. K. Rolling", "Andy Weir")
 
     println(found)
     println(expected)
@@ -24,7 +24,7 @@ object books2 {
 
   def findAuthorsWithMultipleTitles(books: List[Book]): List[String] = {
 
-    var res = books.map(book => {
+    books.map(book => {
       book.authors.map(author => {
         author
       })
@@ -33,7 +33,5 @@ object books2 {
       .filter((t) => t._2.length > 1)
       .keys
       .toList
-
-    res
   }
 }
