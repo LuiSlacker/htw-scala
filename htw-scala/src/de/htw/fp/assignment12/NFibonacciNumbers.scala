@@ -2,8 +2,8 @@ package de.htw.fp.assignment12
 
 object NFibonacciNumbers {
   def main(args: Array[String]) = {
-        assert(NFibonacciNumbers(-1), List())
-        assert(NFibonacciNumbers(0), List())
+    assert(NFibonacciNumbers(-1), List())
+    assert(NFibonacciNumbers(0), List())
     assert(NFibonacciNumbers(1), List(0))
     assert(NFibonacciNumbers(2), List(0, 1))
     assert(NFibonacciNumbers(3), List(0, 1, 1))
@@ -30,7 +30,6 @@ object NFibonacciNumbers {
     }
 
     if (goalNumber <= 0) List()
-    else
-      tmp(0, goalNumber, List())
+    else tmp(0, goalNumber, List())
   }
 }
