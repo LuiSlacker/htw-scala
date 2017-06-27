@@ -19,17 +19,15 @@ object NFibonacciNumbers {
 
   def NFibonacciNumbers(goalNumber: Int): List[Int] = {
     def tmp(counter: Int, goalNumber: Int, list: List[Int]): List[Int] = {
-      if (counter == goalNumber)
-        Nil
-      else if (counter == 0)
+      if (counter == goalNumber || goalNumber < 0) 
+        List()
+      else if (counter == 0) 
         0 :: tmp(counter + 1, goalNumber, 0 :: list)
-      else if (counter == 1)
+      else if (counter == 1) 
         1 :: tmp(counter + 1, goalNumber, 1 :: list)
-      else (list.head + list.tail.head) :: tmp(counter + 1, goalNumber, (list.head + list.tail.head) :: list)
-
+      else 
+        (list.head + list.tail.head) :: tmp(counter + 1, goalNumber, (list.head + list.tail.head) :: list)
     }
-
-    if (goalNumber <= 0) List()
-    else tmp(0, goalNumber, List())
+    tmp(0, goalNumber, List())
   }
 }
