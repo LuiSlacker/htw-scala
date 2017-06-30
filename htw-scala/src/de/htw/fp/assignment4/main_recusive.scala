@@ -6,8 +6,8 @@ import scala.annotation.tailrec
 object main_recusive {
   def main(args: Array[String]) {
     val basePath = "src/de/htw/fp/assignment4/";
-    val labyrinth: Labyrinth = readLabyrinthFile(basePath + "labyrinth1.txt")
-    println(findPath(labyrinth))
+    val labyrinth: Labyrinth = readLabyrinthFile(basePath + "labyrinth7.txt")
+    findPath(labyrinth)
   }
   
   type Labyrinth = Seq[Seq[Cell]]
@@ -23,7 +23,7 @@ object main_recusive {
     }
   }
   
-  def findPath(labyrinth: Labyrinth): Path = {
+  def findPath(labyrinth: Labyrinth): Boolean = {
     
     def findStart(labyrinth: Labyrinth): Position = {
       for(y <- 0 until labyrinth.length) {
@@ -57,14 +57,16 @@ object main_recusive {
     		.filter (p => isValidPosition(labyrinth, p) && isFree(labyrinth, p) && notVisited(path, p))
     }
     
-    def depthFirstSearch(labyrinth: Labyrinth, position: Position, path: Path, visited: List[Position]): Path = {
-      if (isExit(position, labyrinth)) position :: path
+    def printPath(path: Path) = synchronized {
+      println(path reverse)
+    }
+    
+    def depthFirstSearch(labyrinth: Labyrinth, position: Position, path: Path, visited: List[Position]): Boolean = {
+      if (isExit(position, labyrinth)) { printPath(path); true }
       else {
         val neighboursNotYetVisited = nonVisitedFreeNeighbours(labyrinth, position, visited)
-        (neighboursNotYetVisited.map { n => depthFirstSearch(labyrinth, n, path, n :: visited)}
-                                filter (n => !n.isEmpty)
-                                map (n => position :: n)).head
-        
+        neighboursNotYetVisited.par.map { n => depthFirstSearch(labyrinth, n, position :: path, n :: visited)}
+        true
       }
     }
     
