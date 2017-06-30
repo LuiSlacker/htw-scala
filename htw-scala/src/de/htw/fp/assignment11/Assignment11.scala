@@ -16,10 +16,10 @@ object Assignment11 {
   def main(args: Array[String]) = {
 
     val basePath = "src/de/htw/fp/assignment4/";
-    val labyrinth: main_tailRecursive.Labyrinth = main_tailRecursive.readLabyrinthFile(basePath + "labyrinth1.txt")
+    val labyrinth: main_recusive_par.Labyrinth = main_recusive_par.readLabyrinthFile(basePath + "labyrinth1.txt")
 
     assert(
-      main_tailRecursive.findPath(labyrinth),
+      main_recusive_par.findPath(labyrinth),
       List((0, 1), (1, 1), (2, 1), (2, 2),
         (2, 3), (1, 3), (1, 4), (1, 5),
         (2, 5), (3, 5), (3, 4), (4, 4),
