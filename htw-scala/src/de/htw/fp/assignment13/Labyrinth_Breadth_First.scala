@@ -16,7 +16,7 @@ object Labyrinth_Breadth_First {
     }
   }
 
-  def findPath(labyrinth: Labyrinth): Path = {
+  def findPath(labyrinth: Labyrinth): Stream[Path] = {
 
     def findStart(labyrinth: Labyrinth): Position = {
       for (y <- 0 until labyrinth.length) {
@@ -29,8 +29,10 @@ object Labyrinth_Breadth_First {
     }
 
     def isExit(p: Position, labyrinth: Labyrinth): Boolean = {
-      val cell = labyrinth(p.y)(p.x)
-      cell.free && (p.x == 0 || p.y == 0 || p.y == (labyrinth.length - 1) || p.x == (labyrinth(p.x).length - 1))
+      if (isValidPosition(labyrinth, p))
+        labyrinth(p.y)(p.x).free && (p.x == 0 || p.y == 0 || p.y == (labyrinth.length - 1) || p.x == (labyrinth(0).length - 1))
+      else
+        false
     }
 
     def isValidPosition(labyrinth: Labyrinth, p: Position): Boolean = {
@@ -50,51 +52,33 @@ object Labyrinth_Breadth_First {
         .filter(p => isValidPosition(labyrinth, p) && isFree(labyrinth, p) && notVisited(path, p))
     }
 
-    def depthFirstSearch(labyrinth: Labyrinth, position: Position, path: Path, visited: List[Position]): Path = {
-      if (isExit(position, labyrinth)) position :: path
-      else {
-        val neighboursNotYetVisited = nonVisitedFreeNeighbours(labyrinth, position, visited)
-        var p = (neighboursNotYetVisited.map {
-          n => depthFirstSearch(labyrinth, n, path, n :: visited)
-        } filter (n =>
-          !n.isEmpty)
-          map (n => position :: n))
-
-        if (p.isEmpty)
-          Nil
-        else
-          p.head
-
-      }
-    }
-
-    def lösLAb(lab: Labyrinth, start: Position): Path = {
-
+    def lösLab(lab: Labyrinth, start: Position): Stream[Path] = {
+      
       def wegevon(von: Stream[Path], beendet: Set[Position]): Stream[Path] = {
         val längereWege = for {
           weg <- von
-          neupos <- List(weg.head.top, weg.head.bottom, weg.head.right, weg.head.right)
+          neupos <- List(weg.head.top, weg.head.bottom, weg.head.right, weg.head.left)
           if (isValidPosition(lab, neupos) && isFree(lab, neupos))
-          if (!notVisited(weg, neupos))
+          if (notVisited(weg, neupos))
         } yield neupos :: weg
-        längereWege
-        //        längereWege #:: wegevon(längereWege, beendet)
-        //          val neuposlist = längereWege.map(_.head)
-        //          if(längereWege.isEmty) von// nil neues
-        //          else von append wegvon (längereWege,  besucht ++ wenposlist)
-        //          löslab
-        //          val wege = wegean (STream(List(start)) , Set.empty)
-        //          filter(weg=> ist ausgang(Weg.head, lab))
-        //          if(wege.isEmpty) Nil else wege.head
+
+        val neuposlist = längereWege.map(_.head)
+        if (längereWege.isEmpty)
+          von // nil neues
+        else
+          von append wegevon(längereWege, beendet)
+
       }
 
-      println(wegevon(Stream(List(start)), Set()))
-      List()
+      val wege = wegevon(Stream(List(start)), Set.empty)
+        .filter(weg => isExit(weg.head, lab))
+        
+      wege
     }
-    println(lösLAb(labyrinth, findStart(labyrinth)))
 
-    List()
-    //    depthFirstSearch(labyrinth, findStart(labyrinth), List(), List());
+    
+    lösLab(labyrinth, findStart(labyrinth))
+
   }
 
 }
