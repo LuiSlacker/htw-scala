@@ -1,9 +1,9 @@
-package de.htw.fp.assignment11
+package de.htw.fp.assignment13
 
 import scala.io.Source
 import scala.annotation.tailrec
 
-object main_recusive_par {
+object Labyrinth_Breadth_First {
 
   type Labyrinth = Seq[Seq[Cell]]
   type Path = List[Position]
@@ -57,19 +57,44 @@ object main_recusive_par {
         var p = (neighboursNotYetVisited.map {
           n => depthFirstSearch(labyrinth, n, path, n :: visited)
         } filter (n =>
-          !n.isEmpty
-          )
+          !n.isEmpty)
           map (n => position :: n))
 
-          if(p.isEmpty)
-            Nil
-          else
+        if (p.isEmpty)
+          Nil
+        else
           p.head
-        
+
       }
     }
 
-    depthFirstSearch(labyrinth, findStart(labyrinth), List(), List());
+    def lösLAb(lab: Labyrinth, start: Position): Path = {
 
+      def wegevon(von: Stream[Path], beendet: Set[Position]): Stream[Path] = {
+        val längereWege = for {
+          weg <- von
+          neupos <- List(weg.head.top, weg.head.bottom, weg.head.right, weg.head.right)
+          if (isValidPosition(lab, neupos) && isFree(lab, neupos))
+          if (!notVisited(weg, neupos))
+        } yield neupos :: weg
+        längereWege
+        //        längereWege #:: wegevon(längereWege, beendet)
+        //          val neuposlist = längereWege.map(_.head)
+        //          if(längereWege.isEmty) von// nil neues
+        //          else von append wegvon (längereWege,  besucht ++ wenposlist)
+        //          löslab
+        //          val wege = wegean (STream(List(start)) , Set.empty)
+        //          filter(weg=> ist ausgang(Weg.head, lab))
+        //          if(wege.isEmpty) Nil else wege.head
+      }
+
+      println(wegevon(Stream(List(start)), Set()))
+      List()
+    }
+    println(lösLAb(labyrinth, findStart(labyrinth)))
+
+    List()
+    //    depthFirstSearch(labyrinth, findStart(labyrinth), List(), List());
   }
+
 }

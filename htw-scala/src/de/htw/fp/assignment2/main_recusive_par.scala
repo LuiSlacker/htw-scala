@@ -1,7 +1,8 @@
-package de.htw.fp.assignment11
+package de.htw.fp.assignment2
 
 import scala.io.Source
-import scala.annotation.tailrec
+import de.htw.fp.assignment11.Cell
+import de.htw.fp.assignment11.Position
 
 object main_recusive_par {
 

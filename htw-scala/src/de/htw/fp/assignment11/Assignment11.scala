@@ -1,5 +1,6 @@
 package de.htw.fp.assignment11
 
+
 object Assignment11 {
 
   /**
