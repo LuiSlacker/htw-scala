@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<form action="/coins">
+
+	<p>	Um den dynamisch generierten Inhalt interaktiv zu testen, 
+	  <br>ist eine einfache HTML-Seite zweckmäßig, die ein entsprechendes 
+	  <br>Formular enthält. Mit <form method=GET> wird dabei der einfacher
+	  <br> zu parsende GET-Request anstelle des per Default verwendeten POST-Requests abgesetzt.
+	</p>
+  Summe: <input type="number" d="summe" name="summe" value="20">
+  
+  <br>
+  Coins:
+  <fieldset>
+	  <input type="checkbox" name="coins" value="1" checked>1<br>
+	  <input type="checkbox" name="coins" value="2" checked>2<br>
+	  <input type="checkbox" name="coins" value="5" checked>5<br>
+	  <input type="checkbox" name="coins" value="10" >10<br>
+	  <input type="checkbox" name="coins" value="20" >20<br>
+  </fieldset>
+  
+  <br>
+  Currency
+  <select name="currency">
+    <option value="Euro">Euro</option>
+    <option value="Dollar">Dollar</option>
+    <option value="Pesus">Pesus</option>
+    <option value="Bitcoin">Bitcoin</option>
+  </select>
+  
+  <br>
+  <br>
+  <input type="submit">
+</form> 
+
+<p>If you click the "Submit" button, the form-data will be sent to a page called "/action_page.php".</p>
+
+</body>
+</html>

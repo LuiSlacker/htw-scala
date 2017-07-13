@@ -70,15 +70,11 @@ object Labyrinth_Breadth_First {
 
       }
 
-      val wege = wegevon(Stream(List(start)), Set.empty)
-        .filter(weg => isExit(weg.head, lab))
-        
-      wege
+      wegevon(Stream(List(start)), Set.empty)
+      .filter(weg => isExit(weg.head, lab))
     }
-
     
     lösLab(labyrinth, findStart(labyrinth))
-
   }
 
 }
